@@ -30,7 +30,7 @@ CREATE TABLE output (t TEXT, maxx integer, maxy integer, pos integer);
 
 PRAGMA recursive_triggers = ON;
 CREATE TRIGGER draw_output
-AFTER UPDATE ON output WHEN NEW.pos < (1+NEW.maxx) * (1+NEW.maxy)
+AFTER UPDATE ON output WHEN NEW.pos < (NEW.maxx) * (NEW.maxy)
 BEGIN
 UPDATE output SET t = t || COALESCE(
 	(
@@ -42,7 +42,7 @@ UPDATE output SET t = t || COALESCE(
 pos = NEW.pos + 1;
 END;
 
-insert into output SELECT '', MAX(x), MAX(y), 0 FROM grid;
+insert into output SELECT '', MAX(x)+1, MAX(y)+1, 0 FROM grid;
 update output set t = '
 ';
 
