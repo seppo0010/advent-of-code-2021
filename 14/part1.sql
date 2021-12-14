@@ -1,11 +1,11 @@
 .mode csv input
 create table polymer (str text, pos integer default 0, id integer primary key autoincrement);
-.import miniinput polymer
+.import input polymer
 DELETE FROM polymer WHERE id > 1;
 
 .separator " "
 CREATE TABLE rules (input char(2), garbage char(4), output char(1));
-.import miniinput rules
+.import input rules
 DELETE FROM rules WHERE garbage != '->' OR garbage is NULL;
 
 -- CREATE TABLE log (str text, pos integer);
